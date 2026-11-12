@@ -1,0 +1,12 @@
+node_modules/
+.env
+dist/
+client/dist/
+*.log
+.DS_Store
+prisma/*.db
+prisma/*.db-journal
+.postgres-data/
+server/.postgres-data/
+server/.env
+coverage/

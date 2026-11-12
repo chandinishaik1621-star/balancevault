@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: balancevault-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: balance_user
+      POSTGRES_PASSWORD: securepassword
+      POSTGRES_DB: balancevault
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./server/scripts/setup-db-roles.sql:/docker-entrypoint-initdb.d/setup-roles.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U balance_user -d balancevault"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: balancevault-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+  redisdata:
+

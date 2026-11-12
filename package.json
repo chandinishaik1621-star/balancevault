@@ -1,0 +1,26 @@
+{
+  "name": "balancevault",
+  "version": "1.0.0",
+  "description": "BalanceVault — Money movement with a ledger you can prove",
+  "main": "server/src/index.js",
+  "scripts": {
+    "install:server": "npm --prefix server install",
+    "install:client": "npm --prefix client install",
+    "install:all": "npm install && npm run install:server && npm run install:client",
+    "prisma:generate": "npm --prefix server run prisma:generate",
+    "prisma:push": "npm --prefix server run prisma:push",
+    "setup:db": "npm run prisma:generate && npm run prisma:push",
+    "seed": "npm --prefix server run prisma:seed",
+    "admin:bootstrap": "npm --prefix server run admin:bootstrap",
+    "build:client": "npm --prefix client run build",
+    "render-build": "npm --prefix server install && npm --prefix client install && npm --prefix client run build && npm --prefix server run prisma:generate && npm --prefix server run prisma:push && npm --prefix server run prisma:seed",
+    "build": "npm run setup:db && npm run build:client",
+    "start": "node server/src/index.js",
+    "dev:server": "node server/src/index.js",
+    "dev:client": "npm --prefix client run dev",
+    "test": "npm --prefix server test"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
+
