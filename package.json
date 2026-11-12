@@ -13,7 +13,7 @@
     "seed": "npm --prefix server run prisma:seed",
     "admin:bootstrap": "npm --prefix server run admin:bootstrap",
     "build:client": "npm --prefix client run build",
-    "render-build": "npm --prefix server install && npm --prefix client install && npm --prefix client run build && npm --prefix server run prisma:generate && npm --prefix server run prisma:push && npm --prefix server run prisma:seed",
+    "render-build": "npm --prefix server install && npm --prefix client install --include=dev && npm --prefix client run build && npm --prefix server run prisma:generate && npm --prefix server run prisma:push && npm --prefix server run prisma:seed",
     "build": "npm run setup:db && npm run build:client",
     "start": "node server/src/index.js",
     "dev:server": "node server/src/index.js",
